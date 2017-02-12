@@ -1,0 +1,94 @@
+<html lang="en" >
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sirius - Slack extensions</title>
+        <meta charset="UTF-8">
+        <meta property="og:title" content="Sirius - Slack extensions"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:site_name" content="adsa.se">
+        <meta name="description" content="Configure Slack extensions"/>
+        <meta name="author" content="Adam Sandström <adsa95@gmail.com>"/>
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        <style>
+            .md-errors-spacer{
+                display: none !important;
+            }
+
+            #card-token md-input-container{
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            #card-token md-input-container input{
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .layout-max-width {
+                width: 100%;
+                max-width: 1200px;
+            }
+            #btn-save{
+                min-width: 100px !important;
+            }
+
+            #btn-save md-progress-circular{
+                margin-left: 10px;
+            }
+        </style>
+    </head>
+    <body ng-app="sirius" ng-cloak>
+        <md-content>
+            <md-toolbar flex layout="row" layout-align="center">
+                <div class="md-toolbar-tools layout-max-width">
+                    <h2>Sirius - Slack plugins</h2>
+                </div>
+            </md-toolbar>
+        </md-content>
+        <md-content ng-controller="MainController" flex layout="column" layout-align="start center">
+            <md-card id="card-token" class="layout-max-width">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Step 1: Enter your slack token</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                    <md-input-container class="md-block" md-no-float>
+                        <input type="text" ng-model="token" placeholder="xoxp-234234234-23234234-234234324234234-2342343242433">
+                    </md-input-container>
+                </md-card-content>
+            </md-card>
+            <md-card class="layout-max-width">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Step 2: Choose plugins</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-list>
+                    <md-list-item ng-repeat="plugin in plugins">
+                        <md-checkbox ng-model="plugin.selected"></md-checkbox>
+                        <div>
+                            <h3>{{plugin.name}}</h3>
+                            <p>{{plugin.description}}</p>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card>
+            <md-card class="layout-max-width">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Step 3: Save and enjoy!</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content layout="row" layout-align="start center">
+                    <md-button id="btn-save" ng-disabled="saving" class="md-primary md-raised" ng-click="save()" layout="row" layout-align="center center">Save!</md-button><md-progress-circular ng-if="saving" class="md-accent" md-diameter="20px"></md-progress-circular>
+                </md-card-content>
+            </md-card>
+        </md-content>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
