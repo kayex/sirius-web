@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
         <style>
             .md-errors-spacer{
-                display: none !important;
+                display: none;
             }
 
             #card-token md-input-container{
@@ -26,13 +26,6 @@
             .layout-max-width {
                 width: 100%;
                 max-width: 1200px;
-            }
-            #btn-save{
-                min-width: 100px !important;
-            }
-
-            #btn-save md-progress-circular{
-                margin-left: 10px;
             }
         </style>
     </head>
@@ -80,7 +73,7 @@
                     </md-card-title-text>
                 </md-card-title>
                 <md-card-content layout="row" layout-align="start center">
-                    <md-button id="btn-save" ng-disabled="saving" class="md-primary md-raised" ng-click="save()" layout="row" layout-align="center center">Save!</md-button><md-progress-circular ng-if="saving" class="md-accent" md-diameter="20px"></md-progress-circular>
+                    <md-button ng-disabled="saving" class="md-primary md-raised" ng-click="save()" layout="row" layout-align="center center">Save!</md-button><md-progress-circular ng-if="saving" class="md-accent" md-diameter="20px"></md-progress-circular>
                 </md-card-content>
             </md-card>
         </md-content>
