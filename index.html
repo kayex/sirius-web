@@ -27,6 +27,15 @@
                 width: 100%;
                 max-width: 1200px;
             }
+            md-list-item > md-checkbox{
+                margin-right: 29px !important;
+                margin-left: 3px !important;
+                margin-top: 16px !important;
+                margin-bottom: 16px !important;
+            }
+            md-chips > md-chips-wrap{
+                flex: 1;
+            }
         </style>
     </head>
     <body ng-app="sirius" ng-cloak>
@@ -57,12 +66,24 @@
                     </md-card-title-text>
                 </md-card-title>
                 <md-list>
-                    <md-list-item ng-repeat="plugin in plugins">
+                    <md-divider></md-divider>
+                    <md-list-item ng-repeat="plugin in plugins" class="md-no-proxy">
                         <md-checkbox ng-model="plugin.selected"></md-checkbox>
-                        <div>
+                        <div flex>
                             <h3>{{plugin.name}}</h3>
                             <p>{{plugin.description}}</p>
+                            <b ng-if="plugin.config !== null">Plugin options:</b>
+                            <div class="options" ng-repeat="option in plugin.config" ng-init="option.value = option.value ? option.value : option.default" flex>
+                                <md-switch ng-if="option.type == 'bool'" ng-model="option.value">{{::option.key}}</md-switch>
+                                <md-input-container ng-if="option.type == 'string'" flex>
+                                    <input ng-model="option.value" placeholder="{{::option.key}}">
+                                </md-input-container>
+                                <md-chips ng-if="option.type == 'list'" layout="row" ng-model="option.value" placeholder="{{::option.key}}" flex>
+                                    <md-chip-template>{{$chip}}</md-chip-template>
+                                </md-chips>
+                            </div>
                         </div>
+                        <md-divider ng-if="!$last"></md-divider>
                     </md-list-item>
                 </md-list>
             </md-card>
