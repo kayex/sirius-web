@@ -81,6 +81,11 @@
                                 <md-chips ng-if="option.type == 'list'" layout="row" ng-model="option.value" placeholder="{{::option.key}}" flex>
                                     <md-chip-template>{{$chip}}</md-chip-template>
                                 </md-chips>
+                                <md-input-container ng-if="option.type == 'select'" flex>
+                                    <md-select ng-model="option.value" placeholder="{{::option.key}}">
+                                        <md-option ng-value="val" ng-repeat="val in option.values">{{val}}</md-option>
+                                    </md-select>
+                                </md-input-container>
                             </div>
                         </div>
                         <md-divider ng-if="!$last"></md-divider>
