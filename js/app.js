@@ -18,13 +18,11 @@ app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope
     }
 
     $http.get(BASEPATH + '/plugins').then(function(res){
-        console.log(res.data);
         $scope.plugins = res.data;
 
         if($scope.siriusId !== ""){
             $http.get(BASEPATH + '/configs/' + $scope.siriusId).then(function(res){
                 let config = res.data;
-                console.log(config);
                 for (var i = 0; i < $scope.plugins.length; i++) {
                     if(config.config.hasOwnProperty($scope.plugins[i].name)){
                         $scope.plugins[i].selected = true;
@@ -39,8 +37,6 @@ app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope
                         }
                     }
                 }
-
-                console.log($scope.generateConfig());
             })
         }
     });
@@ -76,7 +72,6 @@ app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope
         $scope.saving = true;
 
         $http.post(BASEPATH + '/configs', $scope.generateConfig()).then(function(res){
-            console.log(res);
             localStorage.setItem('sirius_id', res.data.sirius_id);
             localStorage.setItem('slack_token', res.data.slack_token);
             $mdToast.show($mdToast.simple().textContent('Registration saved successfully!'));
