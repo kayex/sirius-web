@@ -78,7 +78,7 @@
                                 <md-input-container ng-if="option.type == 'string'" flex>
                                     <input ng-model="option.value" placeholder="{{::option.key}}">
                                 </md-input-container>
-                                <md-chips ng-if="option.type == 'list'" layout="row" ng-model="option.value" placeholder="{{::option.key}}" flex>
+                                <md-chips ng-if="option.type == 'list'" layout="row" ng-model="option.value" placeholder="{{::option.key}}" flex md-separator-keys="[13,9]">
                                     <md-chip-template>{{$chip}}</md-chip-template>
                                 </md-chips>
                                 <md-input-container ng-if="option.type == 'select'" flex>
