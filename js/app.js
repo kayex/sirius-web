@@ -5,7 +5,7 @@ var BASEPATH = "http://sirius-backend.herokuapp.com";
 app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope, $http, $mdToast){
 
     $scope.saving = false;
-    $scope.plugins = [];
+    $scope.extensions = [];
     $scope.token = "";
     $scope.siriusId = "";
 
@@ -17,23 +17,23 @@ app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope
         $scope.siriusId = localStorage.sirius_id;
     }
 
-    $http.get(BASEPATH + '/plugins').then(function(res){
+    $http.get(BASEPATH + '/extensions').then(function(res){
         console.log(res.data);
-        $scope.plugins = res.data;
+        $scope.extensions = res.data;
 
         if($scope.siriusId !== ""){
             $http.get(BASEPATH + '/configs/' + $scope.siriusId).then(function(res){
                 let config = res.data;
                 console.log(config);
-                for (var i = 0; i < $scope.plugins.length; i++) {
-                    if(config.config.hasOwnProperty($scope.plugins[i].name)){
-                        $scope.plugins[i].selected = true;
+                for (var i = 0; i < $scope.extensions.length; i++) {
+                    if(config.config.hasOwnProperty($scope.extensions[i].name)){
+                        $scope.extensions[i].selected = true;
 
-                        if(Array.isArray($scope.plugins[i].config)){
-                            for (var j = 0; j < $scope.plugins[i].config.length; j++) {
-                                let key = $scope.plugins[i].config[j].key;
-                                if(config.config[$scope.plugins[i].name].hasOwnProperty(key)){
-                                    $scope.plugins[i].config[j].value = config.config[$scope.plugins[i].name][key];
+                        if(Array.isArray($scope.extensions[i].config)){
+                            for (var j = 0; j < $scope.extensions[i].config.length; j++) {
+                                let key = $scope.extensions[i].config[j].key;
+                                if(config.config[$scope.extensions[i].name].hasOwnProperty(key)){
+                                    $scope.extensions[i].config[j].value = config.config[$scope.extensions[i].name][key];
                                 }
                             }
                         }
@@ -46,10 +46,10 @@ app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope
     });
 
     $scope.generateConfig = function(){
-        let plugins = {};
+        let extensions = {};
 
-        for (var i = 0; i < $scope.plugins.length; i++) {
-            let p = $scope.plugins[i];
+        for (var i = 0; i < $scope.extensions.length; i++) {
+            let p = $scope.extensions[i];
             if(p.selected){
                 let options = {};
 
@@ -60,13 +60,13 @@ app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope
                     }
                 }
 
-                plugins[p.name] = options;
+                extensions[p.name] = options;
             }
         }
 
         let config = {
             slack_token: $scope.token,
-            config: plugins
+            extensions: extensions
         };
 
         return config;
