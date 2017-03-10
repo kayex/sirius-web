@@ -1,6 +1,6 @@
 var app = angular.module("sirius", ['ngMaterial']);
 
-var BASEPATH = "http://sirius-backend.herokuapp.com";
+var BASEPATH = "https://sirius-backend.herokuapp.com";
 
 app.controller('MainController', ['$scope', '$http', '$mdToast', function($scope, $http, $mdToast){
 
